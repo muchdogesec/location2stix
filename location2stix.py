@@ -107,6 +107,12 @@ def fetch_stix_object(url):
     response.raise_for_status()
     return parse(response.json())
 
+def generate_md5_from_list(stix_objects):
+    md5_hash = hashlib.md5()
+    for obj in sorted(stix_objects, key=lambda x: x['id']):
+        md5_hash.update(obj['id'].encode('utf-8'))
+    return md5_hash.hexdigest()
+
 def main():
     csv_file_path = 'input_data/ISO-3166-Countries-with-Regional-Codes.csv'
     data = read_csv(csv_file_path)
@@ -223,11 +229,19 @@ def main():
             print(f"Created relationship between intermediate-region {intermediate_region_name} and sub-region {sub_region_name}")
 
     all_objects = list(src.query()) + relationships  # Query all objects in the filestore and add relationships
-    bundle = Bundle(objects=all_objects, allow_custom=True)
-    bundle_dict = json.loads(bundle.serialize())  # Convert to dictionary to allow pretty-printing
+
+    # Serialize objects before generating UUID
+    serialized_objects = [json.loads(obj.serialize()) for obj in all_objects]
+    bundle_uuid = "bundle--" + str(uuid.uuid5(NAMESPACE_UUID, generate_md5_from_list(serialized_objects)))
+
+    bundle = {
+        "type": "bundle",
+        "id": bundle_uuid,
+        "objects": serialized_objects
+    }
 
     with open('stix2_objects/locations-bundle.json', 'w') as f:
-        json.dump(bundle_dict, f, indent=4)
+        json.dump(bundle, f, indent=4)
 
 if __name__ == '__main__':
     main()
