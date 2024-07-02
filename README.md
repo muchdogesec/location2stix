@@ -20,6 +20,10 @@ This code is designed to map UN Regions, Groupings of Countries and Countries th
 
 We use ISO 3166 to generate this data, you can see this data in the `ISO-3166-Countries-with-Regional-Codes.csv` in the `input_data` directory of this repository.
 
+## tl;dr
+
+[![stix2arango](https://img.youtube.com/vi/lMmAi9FveC0/0.jpg)](https://www.youtube.com/watch?v=lMmAi9FveC0)
+
 ## Install the script
 
 ```shell
