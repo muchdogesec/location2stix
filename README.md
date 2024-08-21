@@ -2,13 +2,9 @@
 
 A command line tool that converts Countries and Regions into STIX 2.1 Location objects with rich relationships
 
-## Before you get started
-
-If you do not want to backfill, maintain, or support your own Location STIX objects check out CTI Butler which provides a fully manage database of these objects and more!
-
-https://www.ctibutler.com/
-
 ## Overview
+
+![](docs/location2stix.png)
 
 The STIX Location object allows you to map location from country level all the way down to an exact address or latitude / longitude pair.
 
@@ -23,6 +19,8 @@ We use ISO 3166 to generate this data, you can see this data in the `ISO-3166-Co
 ## tl;dr
 
 [![stix2arango](https://img.youtube.com/vi/lMmAi9FveC0/0.jpg)](https://www.youtube.com/watch?v=lMmAi9FveC0)
+
+[Watch the demo](https://www.youtube.com/watch?v=lMmAi9FveC0).
 
 ## Install the script
 
@@ -43,6 +41,7 @@ pip3 install -r requirements.txt
 python3 location2stix.py
 ```
 
+You can see the current version of the bundle in `output/locations-bundle.json`
 ## STIX Mappings
 
 ### A note on the STIX2 filestore
@@ -80,6 +79,10 @@ Each country object is mapped to a STIX location object as follows;
         "<IMPORTED MARKING DEFINITION>"
     ],
     "external_references": [
+        {
+            "source_name": "type",
+            "external_id": "<either county/region/sub-region/intermediate-region>"
+        },
         {
             "source_name": "alpha-3",
             "external_id": "<alpha-3>"
@@ -209,6 +212,7 @@ For each of these relationships, a STIX SRO is created as follows
     "created_by_ref": "<IMPORTED IDENTITY>",
     "created": "2020-01-01T00:00:00.000Z",
     "modified": "2020-01-01T00:00:00.000Z",
+    "description": "<SOURCE.NAME> belongs to the <TYPE> of <TARGET>",
     "relationship_type": "<TYPE>",
     "source_ref": "<SOURCE>",
     "target_ref": "<TARGET>",

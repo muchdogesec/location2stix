@@ -45,34 +45,7 @@ def create_location_object(name, region, alpha2, alpha3, iso_3166_2, country_cod
             {"source_name": "alpha-3", "external_id": alpha3},
             {"source_name": "iso_3166-2", "external_id": iso_3166_2},
             {"source_name": "country-code", "external_id": country_code},
-        ]
-    )
-
-def create_intermediate_region_object(name, intermediate_region_code):
-    return Location(
-        id="location--" + generate_uuid_v5(name),
-        created_by_ref=IDENTITY_ID,
-        created="2020-01-01T00:00:00.000Z",
-        modified="2020-01-01T00:00:00.000Z",
-        name=name,
-        region=convert_subregion(name),
-        object_marking_refs=[MARKING_DEFINITION_ID, "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"],
-        external_references=[
-            {"source_name": "intermediate-region-code", "external_id": intermediate_region_code}
-        ]
-    )
-
-def create_subregion_object(name, sub_region_code):
-    return Location(
-        id="location--" + generate_uuid_v5(name),
-        created_by_ref=IDENTITY_ID,
-        created="2020-01-01T00:00:00.000Z",
-        modified="2020-01-01T00:00:00.000Z",
-        name=name,
-        region=convert_subregion(name),
-        object_marking_refs=[MARKING_DEFINITION_ID, "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"],
-        external_references=[
-            {"source_name": "sub-region-code", "external_id": sub_region_code}
+            {"source_name": "type", "external_id": "country"}
         ]
     )
 
@@ -86,16 +59,48 @@ def create_region_object(name, region_code):
         region=convert_subregion(name),
         object_marking_refs=[MARKING_DEFINITION_ID, "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"],
         external_references=[
-            {"source_name": "region-code", "external_id": region_code}
+            {"source_name": "region-code", "external_id": region_code},
+            {"source_name": "type", "external_id": "region"}
         ]
     )
 
-def create_relationship(source_ref, target_ref, relationship_type):
+def create_subregion_object(name, sub_region_code):
+    return Location(
+        id="location--" + generate_uuid_v5(name),
+        created_by_ref=IDENTITY_ID,
+        created="2020-01-01T00:00:00.000Z",
+        modified="2020-01-01T00:00:00.000Z",
+        name=name,
+        region=convert_subregion(name),
+        object_marking_refs=[MARKING_DEFINITION_ID, "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"],
+        external_references=[
+            {"source_name": "sub-region-code", "external_id": sub_region_code},
+            {"source_name": "type", "external_id": "sub-region"}
+        ]
+    )
+
+def create_intermediate_region_object(name, intermediate_region_code):
+    return Location(
+        id="location--" + generate_uuid_v5(name),
+        created_by_ref=IDENTITY_ID,
+        created="2020-01-01T00:00:00.000Z",
+        modified="2020-01-01T00:00:00.000Z",
+        name=name,
+        region=convert_subregion(name),
+        object_marking_refs=[MARKING_DEFINITION_ID, "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"],
+        external_references=[
+            {"source_name": "intermediate-region-code", "external_id": intermediate_region_code},
+            {"source_name": "type", "external_id": "intermediate-region"}
+        ]
+    )
+
+def create_relationship(source_ref, target_ref, relationship_type, source_name, target_name):
     return Relationship(
         id="relationship--" + generate_relationship_uuid_v5(source_ref, target_ref),
         created_by_ref=IDENTITY_ID,
         created="2020-01-01T00:00:00.000Z",
         modified="2020-01-01T00:00:00.000Z",
+        description=f"{source_name} belongs to the {relationship_type} of {target_name}",
         relationship_type=relationship_type,
         source_ref=source_ref,
         target_ref=target_ref,
@@ -188,21 +193,39 @@ def main():
         region_name = next((row['region'] for row in data if row['name'] == country.name), '')
 
         if sub_region_name and sub_region_name in subregions:
-            relationship = create_relationship(country_id, subregions[sub_region_name].id, 'sub-region')
+            relationship = create_relationship(
+                source_ref=country_id,
+                target_ref=subregions[sub_region_name].id,
+                relationship_type='sub-region',
+                source_name=country.name,
+                target_name=subregions[sub_region_name].name
+            )
             relationships.append(relationship)
             if not src.get(relationship.id):
                 sink.add(relationship)
             print(f"Created relationship between country {country.name} and sub-region {sub_region_name}")
 
         if region_name and region_name in regions:
-            relationship = create_relationship(country_id, regions[region_name].id, 'region')
+            relationship = create_relationship(
+                source_ref=country_id,
+                target_ref=regions[region_name].id,
+                relationship_type='region',
+                source_name=country.name,
+                target_name=regions[region_name].name
+            )
             relationships.append(relationship)
             if not src.get(relationship.id):
                 sink.add(relationship)
             print(f"Created relationship between country {country.name} and region {region_name}")
 
         if intermediate_region_name and intermediate_region_name in intermediate_regions:
-            relationship = create_relationship(country_id, intermediate_regions[intermediate_region_name].id, 'intermediate-region')
+            relationship = create_relationship(
+                source_ref=country_id,
+                target_ref=intermediate_regions[intermediate_region_name].id,
+                relationship_type='intermediate-region',
+                source_name=country.name,
+                target_name=intermediate_regions[intermediate_region_name].name
+            )
             relationships.append(relationship)
             if not src.get(relationship.id):
                 sink.add(relationship)
@@ -212,7 +235,13 @@ def main():
     for sub_region_name, subregion in subregions.items():
         region_name = next((row['region'] for row in data if row['sub-region'] == sub_region_name), '')
         if region_name and region_name in regions:
-            relationship = create_relationship(subregion.id, regions[region_name].id, 'region')
+            relationship = create_relationship(
+                source_ref=subregion.id,
+                target_ref=regions[region_name].id,
+                relationship_type='region',
+                source_name=subregion.name,
+                target_name=regions[region_name].name
+            )
             relationships.append(relationship)
             if not src.get(relationship.id):
                 sink.add(relationship)
@@ -222,7 +251,13 @@ def main():
     for intermediate_region_name, intermediate_region in intermediate_regions.items():
         sub_region_name = next((row['sub-region'] for row in data if row.get('intermediate-region', '') == intermediate_region_name), '')
         if sub_region_name and sub_region_name in subregions:
-            relationship = create_relationship(intermediate_region.id, subregions[sub_region_name].id, 'sub-region')
+            relationship = create_relationship(
+                source_ref=intermediate_region.id,
+                target_ref=subregions[sub_region_name].id,
+                relationship_type='sub-region',
+                source_name=intermediate_region.name,
+                target_name=subregions[sub_region_name].name
+            )
             relationships.append(relationship)
             if not src.get(relationship.id):
                 sink.add(relationship)
