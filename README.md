@@ -2,6 +2,10 @@
 
 A command line tool that converts Countries and Regions into STIX 2.1 Location objects with rich relationships
 
+## Before you begin
+
+We host a full web API that includes all objects created by location2stix, [CTIButler](https://www.ctibutler.com/).
+
 ## Overview
 
 ![](docs/location2stix.png)
@@ -82,6 +86,10 @@ Each country object is mapped to a STIX location object as follows;
         {
             "source_name": "type",
             "external_id": "<either county/region/sub-region/intermediate-region>"
+        },
+        {
+            "source_name": "alpha-2",
+            "external_id": "<alpha-2>"
         },
         {
             "source_name": "alpha-3",

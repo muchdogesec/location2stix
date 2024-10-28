@@ -42,10 +42,11 @@ def create_location_object(name, region, alpha2, alpha3, iso_3166_2, country_cod
         country=alpha2,
         object_marking_refs=[MARKING_DEFINITION_ID, "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"],
         external_references=[
+            {"source_name": "type", "external_id": "country"},
+            {"source_name": "alpha-2", "external_id": alpha2},
             {"source_name": "alpha-3", "external_id": alpha3},
             {"source_name": "iso_3166-2", "external_id": iso_3166_2},
-            {"source_name": "country-code", "external_id": country_code},
-            {"source_name": "type", "external_id": "country"}
+            {"source_name": "country-code", "external_id": country_code}
         ]
     )
 
