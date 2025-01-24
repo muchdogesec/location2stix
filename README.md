@@ -102,6 +102,10 @@ Each country object is mapped to a STIX location object as follows;
         {
             "source_name": "country-code",
             "external_id": "<country-code>"
+        },
+        {
+            "source_name": "location2stix",
+            "external_id": "<alpha-2>"
         }
     ]
 }
@@ -139,6 +143,10 @@ For every distinct sub-region in the csv, a sub-region object is created
         {
             "source_name": "intermediate-region-code",
             "external_id": "<intermediate-region-code>"
+        },
+        {
+            "source_name": "location2stix",
+            "external_id": "<CONVERTED intermediate-region>"
         }
     ]
 }
@@ -168,6 +176,10 @@ For every distinct sub-region in the csv, a sub-region object is created
         {
             "source_name": "sub-region-code",
             "external_id": "<sub-region-code>"
+        },
+        {
+            "source_name": "location2stix",
+            "external_id": "<CONVERTED sub-region>"
         }
     ]
 }
@@ -195,6 +207,10 @@ The UUIDv5 is generated using the namespace `674a16c1-8b43-5c3e-8692-b3d8935e490
         {
             "source_name": "region-code",
             "external_id": "<region-code>"
+        },
+        {
+            "source_name": "location2stix",
+            "external_id": "<CONVERTED region>"
         }
     ]
 }
