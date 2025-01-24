@@ -23,7 +23,7 @@ def generate_relationship_uuid_v5(source_ref, target_ref):
     return str(uuid.uuid5(NAMESPACE_UUID, value))
 
 def convert_subregion(subregion):
-    return subregion.lower().replace(" ", "-").replace(" and", "")
+    return subregion.lower().replace(" ", "-").replace("-and-", "-").replace("-the-", "-")
 
 def read_csv(file_path):
     with open(file_path, newline='', encoding='utf-8') as csvfile:
@@ -42,11 +42,12 @@ def create_location_object(name, region, alpha2, alpha3, iso_3166_2, country_cod
         country=alpha2,
         object_marking_refs=[MARKING_DEFINITION_ID, "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"],
         external_references=[
+            {"source_name": "location2stix", "external_id": alpha2},
             {"source_name": "type", "external_id": "country"},
             {"source_name": "alpha-2", "external_id": alpha2},
             {"source_name": "alpha-3", "external_id": alpha3},
             {"source_name": "iso_3166-2", "external_id": iso_3166_2},
-            {"source_name": "country-code", "external_id": country_code}
+            {"source_name": "country-code", "external_id": country_code},
         ]
     )
 
@@ -60,6 +61,7 @@ def create_region_object(name, region_code):
         region=convert_subregion(name),
         object_marking_refs=[MARKING_DEFINITION_ID, "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"],
         external_references=[
+            {"source_name": "location2stix", "external_id": convert_subregion(region_code)},
             {"source_name": "region-code", "external_id": region_code},
             {"source_name": "type", "external_id": "region"}
         ]
@@ -75,6 +77,7 @@ def create_subregion_object(name, sub_region_code):
         region=convert_subregion(name),
         object_marking_refs=[MARKING_DEFINITION_ID, "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"],
         external_references=[
+            {"source_name": "location2stix", "external_id": convert_subregion(sub_region_code)},
             {"source_name": "sub-region-code", "external_id": sub_region_code},
             {"source_name": "type", "external_id": "sub-region"}
         ]
@@ -90,6 +93,7 @@ def create_intermediate_region_object(name, intermediate_region_code):
         region=convert_subregion(name),
         object_marking_refs=[MARKING_DEFINITION_ID, "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487"],
         external_references=[
+            {"source_name": "location2stix", "external_id": convert_subregion(intermediate_region_code)},
             {"source_name": "intermediate-region-code", "external_id": intermediate_region_code},
             {"source_name": "type", "external_id": "intermediate-region"}
         ]
