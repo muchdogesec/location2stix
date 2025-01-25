@@ -45,7 +45,6 @@ pip3 install -r requirements.txt
 python3 location2stix.py
 ```
 
-You can see the current version of the bundle in `output/locations-bundle.json`
 ## STIX Mappings
 
 ### A note on the STIX2 filestore
