@@ -78,6 +78,8 @@ Each country object is mapped to a STIX location object as follows;
 	"name": "<name>",
 	"region": "<CONVERTED SUBREGION>",
 	"country": "<alpha-2>",
+    "latitude": "<lat>",
+    "longitude": "<lng>",
     "x_opencti_aliases": [
         "<alpha-3>",
         "<alpha-2>"
