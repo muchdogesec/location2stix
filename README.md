@@ -60,7 +60,8 @@ On each run, this directory is deleted, and the object regenerated.
 These are hard-coded and imported from our [stix4doge repository](https://github.com/muchdogesec/stix4doge). Specifically these objects;
 
 * Marking Definition: https://raw.githubusercontent.com/muchdogesec/stix4doge/main/objects/marking-definition/location2stix.json
-* Identity: https://raw.githubusercontent.com/muchdogesec/stix4doge/main/objects/identity/location2stix.json
+* Identity: https://raw.githubusercontent.com/muchdogesec/stix4doge/main/objects/identity/dogesec.json
+* Extension Definition: https://raw.githubusercontent.com/muchdogesec/stix2extensions/refs/heads/main/extension-definitions/properties/location-opencti.json
 
 ### Country Level Data
 
@@ -77,6 +78,13 @@ Each country object is mapped to a STIX location object as follows;
 	"name": "<name>",
 	"region": "<CONVERTED SUBREGION>",
 	"country": "<alpha-2>",
+    "x_opencti_aliases": [
+        "<alpha-3>",
+        "<alpha-2>"
+    ],
+    "x_opencti_location_type": [
+        "Country"
+    ],
 	"object_marking_refs": [
         "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487",
         "<IMPORTED MARKING DEFINITION>"
@@ -106,7 +114,12 @@ Each country object is mapped to a STIX location object as follows;
             "source_name": "location2stix",
             "external_id": "<alpha-2>"
         }
-    ]
+    ],
+    "extensions": {
+        "extension-definition--b9c1f945-80be-519d-9d7f-0cede26032e9": {
+            "extension_type": "toplevel-property-extension"
+        }
+    }
 }
 ```
 
@@ -134,6 +147,9 @@ For every distinct sub-region in the csv, a sub-region object is created
 	"modified": "2020-01-01T00:00:00.000Z",
 	"name": "<intermediate-region>",
 	"region": "<CONVERTED intermediate-region>",
+    "x_opencti_location_type": [
+        "Region"
+    ],
 	"object_marking_refs": [
         "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487",
         "<IMPORTED MARKING DEFINITION>"
@@ -147,7 +163,12 @@ For every distinct sub-region in the csv, a sub-region object is created
             "source_name": "location2stix",
             "external_id": "<CONVERTED intermediate-region>"
         }
-    ]
+    ],
+    "extensions": {
+        "extension-definition--b9c1f945-80be-519d-9d7f-0cede26032e9": {
+            "extension_type": "toplevel-property-extension"
+        }
+    }
 }
 ```
 
@@ -167,6 +188,9 @@ For every distinct sub-region in the csv, a sub-region object is created
 	"modified": "2020-01-01T00:00:00.000Z",
 	"name": "<sub-region>",
 	"region": "<CONVERTED sub-region>",
+    "x_opencti_location_type": [
+        "Region"
+    ],
 	"object_marking_refs": [
         "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487",
         "<IMPORTED MARKING DEFINITION>"
@@ -180,7 +204,12 @@ For every distinct sub-region in the csv, a sub-region object is created
             "source_name": "location2stix",
             "external_id": "<CONVERTED sub-region>"
         }
-    ]
+    ],
+    "extensions": {
+        "extension-definition--b9c1f945-80be-519d-9d7f-0cede26032e9": {
+            "extension_type": "toplevel-property-extension"
+        }
+    }
 }
 ```
 
@@ -198,6 +227,9 @@ The UUIDv5 is generated using the namespace `674a16c1-8b43-5c3e-8692-b3d8935e490
 	"modified": "2020-01-01T00:00:00.000Z",
 	"name": "<region>",
 	"region": "<CONVERTED region>",
+    "x_opencti_location_type": [
+        "Region"
+    ],
 	"object_marking_refs": [
         "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487",
         "<IMPORTED MARKING DEFINITION>"
@@ -211,17 +243,22 @@ The UUIDv5 is generated using the namespace `674a16c1-8b43-5c3e-8692-b3d8935e490
             "source_name": "location2stix",
             "external_id": "<CONVERTED region>"
         }
-    ]
+    ],
+    "extensions": {
+        "extension-definition--b9c1f945-80be-519d-9d7f-0cede26032e9": {
+            "extension_type": "toplevel-property-extension"
+        }
+    }
 }
 ```
 
 ### Relationships
 
-1. Sub-regions (`source_ref`) have a relationship to a Regions (`target_ref`) (type: `region`)
-2. Intermediate-regions (`source_ref`) have a relationship to Sub-regions (`target_ref`) (type: `sub-region`)
-3. Countries (`source_ref`) have a relationship to a Sub-region (`target_ref`) (type: `sub-region`)
-4. Countries (`source_ref`) have a relationship to a Region (`target_ref`) (type: `region`)
-5. Countries (`source_ref`) have a relationship to a Intermediate-Region (`target_ref`) (type: `intermediate-region`)
+1. Sub-regions (`source_ref`) have a relationship to a Regions (`target_ref`) (type: `located-at`)
+2. Intermediate-regions (`source_ref`) have a relationship to Sub-regions (`target_ref`) (type: `located-at`)
+3. Countries (`source_ref`) have a relationship to a Sub-region (`target_ref`) (type: `located-atn`)
+4. Countries (`source_ref`) have a relationship to a Region (`target_ref`) (type: `located-at`)
+5. Countries (`source_ref`) have a relationship to a Intermediate-Region (`target_ref`) (type: `located-at`)
 
 <iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVKAj06DQ=/?moveToViewport=-653,-302,761,366&embedId=10658975368" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
 
