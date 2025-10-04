@@ -258,7 +258,7 @@ The UUIDv5 is generated using the namespace `674a16c1-8b43-5c3e-8692-b3d8935e490
 
 1. Sub-regions (`source_ref`) have a relationship to a Regions (`target_ref`) (type: `located-at`)
 2. Intermediate-regions (`source_ref`) have a relationship to Sub-regions (`target_ref`) (type: `located-at`)
-3. Countries (`source_ref`) have a relationship to a Sub-region (`target_ref`) (type: `located-atn`)
+3. Countries (`source_ref`) have a relationship to a Sub-region (`target_ref`) (type: `located-at`)
 4. Countries (`source_ref`) have a relationship to a Region (`target_ref`) (type: `located-at`)
 5. Countries (`source_ref`) have a relationship to a Intermediate-Region (`target_ref`) (type: `located-at`)
 
