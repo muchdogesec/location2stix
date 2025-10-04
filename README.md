@@ -45,6 +45,8 @@ python3 location2stix.py
 
 ![](location2stix-bundle-structure.jpg)
 
+[Source](https://miro.com/app/board/uXjVKAj06DQ=/)
+
 ### A note on the STIX2 filestore
 
 This script uses the STIX2 Python libraries filestore feature.
