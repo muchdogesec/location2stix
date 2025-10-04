@@ -4,6 +4,8 @@ A command line tool that converts Countries and Regions into STIX 2.1 Location o
 
 ## Before you begin
 
+![](docs/ctibutler.png)
+
 We host a full web API that includes all objects created by location2stix, [CTIButler](https://www.ctibutler.com/).
 
 ## Overview
@@ -19,12 +21,6 @@ For intelligence reporting, there are times a specific address or lat/lon pair i
 This code is designed to map UN Regions, Groupings of Countries and Countries themselves as STIX objects so that they can be used freely by intelligence producers when working with location related intelligence.
 
 We use ISO 3166 to generate this data, you can see this data in the `ISO-3166-Countries-with-Regional-Codes.csv` in the `input_data` directory of this repository.
-
-## tl;dr
-
-[![stix2arango](https://img.youtube.com/vi/lMmAi9FveC0/0.jpg)](https://www.youtube.com/watch?v=lMmAi9FveC0)
-
-[Watch the demo](https://www.youtube.com/watch?v=lMmAi9FveC0).
 
 ## Install the script
 
@@ -46,6 +42,8 @@ python3 location2stix.py
 ```
 
 ## STIX Mappings
+
+![](location2stix-bundle-structure.jpg)
 
 ### A note on the STIX2 filestore
 
@@ -261,8 +259,6 @@ The UUIDv5 is generated using the namespace `674a16c1-8b43-5c3e-8692-b3d8935e490
 3. Countries (`source_ref`) have a relationship to a Sub-region (`target_ref`) (type: `located-atn`)
 4. Countries (`source_ref`) have a relationship to a Region (`target_ref`) (type: `located-at`)
 5. Countries (`source_ref`) have a relationship to a Intermediate-Region (`target_ref`) (type: `located-at`)
-
-<iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVKAj06DQ=/?moveToViewport=-653,-302,761,366&embedId=10658975368" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
 
 For each of these relationships, a STIX SRO is created as follows
 
