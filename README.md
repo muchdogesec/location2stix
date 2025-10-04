@@ -72,7 +72,7 @@ Each country object is mapped to a STIX location object as follows;
 	"type": "location",
 	"spec_version": "2.1",
 	"id": "location--<UUID V5>",
-	"created_by_ref": "identity--<IMPORTED IDENTITY>",
+	"created_by_ref": "identity--9779a2db-f98c-5f4b-8d08-8ee04e02dbb5",
 	"created": "2020-01-01T00:00:00.000Z",
 	"modified": "2020-01-01T00:00:00.000Z",
 	"name": "<name>",
@@ -89,7 +89,7 @@ Each country object is mapped to a STIX location object as follows;
     ],
 	"object_marking_refs": [
         "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487",
-        "<IMPORTED MARKING DEFINITION>"
+        "marking-definition--674a16c1-8b43-5c3e-8692-b3d8935e4903"
     ],
     "external_references": [
         {
@@ -144,7 +144,7 @@ For every distinct sub-region in the csv, a sub-region object is created
 	"type": "location",
 	"spec_version": "2.1",
 	"id": "location--<UUID V5>",
-	"created_by_ref": "identity--<IMPORTED IDENTITY>",
+	"created_by_ref": "identity--9779a2db-f98c-5f4b-8d08-8ee04e02dbb5",
 	"created": "2020-01-01T00:00:00.000Z",
 	"modified": "2020-01-01T00:00:00.000Z",
 	"name": "<intermediate-region>",
@@ -154,7 +154,7 @@ For every distinct sub-region in the csv, a sub-region object is created
     ],
 	"object_marking_refs": [
         "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487",
-        "<IMPORTED MARKING DEFINITION>"
+        "marking-definition--674a16c1-8b43-5c3e-8692-b3d8935e4903"
     ],
     "external_references": [
         {
@@ -185,7 +185,7 @@ For every distinct sub-region in the csv, a sub-region object is created
 	"type": "location",
 	"spec_version": "2.1",
 	"id": "location--<UUID V5>",
-	"created_by_ref": "identity--<IMPORTED IDENTITY>",
+	"created_by_ref": "identity--9779a2db-f98c-5f4b-8d08-8ee04e02dbb5",
 	"created": "2020-01-01T00:00:00.000Z",
 	"modified": "2020-01-01T00:00:00.000Z",
 	"name": "<sub-region>",
@@ -195,7 +195,7 @@ For every distinct sub-region in the csv, a sub-region object is created
     ],
 	"object_marking_refs": [
         "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487",
-        "<IMPORTED MARKING DEFINITION>"
+        "marking-definition--674a16c1-8b43-5c3e-8692-b3d8935e4903"
     ],
     "external_references": [
         {
@@ -224,7 +224,7 @@ The UUIDv5 is generated using the namespace `674a16c1-8b43-5c3e-8692-b3d8935e490
 	"type": "location",
 	"spec_version": "2.1",
 	"id": "location--<UUID V5>",
-	"created_by_ref": "identity--<IMPORTED IDENTITY>",
+	"created_by_ref": "identity--9779a2db-f98c-5f4b-8d08-8ee04e02dbb5",
 	"created": "2020-01-01T00:00:00.000Z",
 	"modified": "2020-01-01T00:00:00.000Z",
 	"name": "<region>",
@@ -234,7 +234,7 @@ The UUIDv5 is generated using the namespace `674a16c1-8b43-5c3e-8692-b3d8935e490
     ],
 	"object_marking_refs": [
         "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487",
-        "<IMPORTED MARKING DEFINITION>"
+        "marking-definition--674a16c1-8b43-5c3e-8692-b3d8935e4903"
     ],
     "external_references": [
         {
@@ -271,7 +271,7 @@ For each of these relationships, a STIX SRO is created as follows
     "type": "relationship",
     "spec_version": "2.1",
     "id": "relationship--<UUID V5>",
-    "created_by_ref": "<IMPORTED IDENTITY>",
+    "created_by_ref": "identity--9779a2db-f98c-5f4b-8d08-8ee04e02dbb5",
     "created": "2020-01-01T00:00:00.000Z",
     "modified": "2020-01-01T00:00:00.000Z",
     "description": "<SOURCE.NAME> belongs to the <TYPE> of <TARGET>",
@@ -280,7 +280,7 @@ For each of these relationships, a STIX SRO is created as follows
     "target_ref": "<TARGET>",
     "object_marking_refs": [
         "marking-definition--94868c89-83c2-464b-929b-a1a8aa3c8487",
-        "<IMPORTED MARKING DEFINITION>"
+        "marking-definition--674a16c1-8b43-5c3e-8692-b3d8935e4903"
     ]
 }
 ```
