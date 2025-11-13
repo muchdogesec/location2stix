@@ -20,7 +20,7 @@ NAMESPACE_UUID = uuid.UUID("674a16c1-8b43-5c3e-8692-b3d8935e4903")
 # URLs for the external STIX objects
 IDENTITY_URL = "https://raw.githubusercontent.com/muchdogesec/stix4doge/main/objects/identity/dogesec.json"
 MARKING_DEFINITION_URL = "https://raw.githubusercontent.com/muchdogesec/stix4doge/main/objects/marking-definition/location2stix.json"
-OPENCTI_EXTENSION_URL = "https://raw.githubusercontent.com/muchdogesec/stix2extensions/refs/heads/main/extension-definitions/properties/location-opencti.json"
+OPENCTI_EXTENSION_URL = "https://raw.githubusercontent.com/muchdogesec/stix2extensions/refs/heads/main/automodel_generated/extension-definitions/properties/location-opencti.json"
 
 
 def load_file_from_url(url):
