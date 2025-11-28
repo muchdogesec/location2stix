@@ -13,6 +13,8 @@ from stix2 import (
     Relationship,
     parse,
 )
+import stix2extensions
+from stix2extensions.definitions.properties import LocationOpenCTIPropertyExtension
 
 # Constants
 NAMESPACE_UUID = uuid.UUID("674a16c1-8b43-5c3e-8692-b3d8935e4903")
@@ -90,7 +92,7 @@ def create_country_object(
                 "extension_type": "toplevel-property-extension"
             }
         },
-        x_opencti_location_type=["Country"],
+        x_opencti_location_type="Country",
         x_opencti_aliases=[
             alpha_3,
             alpha_2,
@@ -120,7 +122,7 @@ def create_region_object(name, region_code):
                 "extension_type": "toplevel-property-extension"
             }
         },
-        x_opencti_location_type=["Region"],
+        x_opencti_location_type="Region",
     )
 
 
@@ -146,7 +148,7 @@ def create_subregion_object(name, sub_region_code):
                 "extension_type": "toplevel-property-extension"
             }
         },
-        x_opencti_location_type=["Region"],
+        x_opencti_location_type="Region",
     )
 
 
@@ -175,7 +177,7 @@ def create_intermediate_region_object(name, intermediate_region_code):
                 "extension_type": "toplevel-property-extension"
             }
         },
-        x_opencti_location_type=["Region"],
+        x_opencti_location_type="Region",
     )
 
 
